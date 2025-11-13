@@ -5,3 +5,5 @@ Langchain-community
 sentence-transformers
 pypdf
 streamlit
+langchain_huggingface
+
