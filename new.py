@@ -65,7 +65,7 @@ def get_response(user_query, vectorstore):
     """Main Q&A logic"""
     pdf_context = pdf_search(user_query, vectorstore)
     if pdf_context:
-        prompt = f"Based only on this context, answer clearly , use urdu intead of hindi when answer in hindi is required:\n{pdf_context}\n\nUser: {user_query}"
+        prompt = f"Based only on this context, answer clearly :\n{pdf_context}\n\nUser: {user_query}"
         return llm.invoke(prompt).content
     else:
                     return "No relevant information found in PDF or database."
@@ -117,3 +117,4 @@ if prompt := st.chat_input("Ask your question here..."):
     with st.chat_message("assistant"):
         st.markdown(response)
     st.session_state.chat_history.append({"role": "assistant", "content": response})
+
