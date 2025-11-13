@@ -73,8 +73,8 @@ def get_response(user_query, vectorstore):
 # ---------------- STREAMLIT UI ----------------
 st.set_page_config(page_title="💬 Enterprise Knowledge Chatbot", layout="centered")
 
-st.title("💬 Enterprise Knowledge Chatbot")
-st.caption("Ask questions using uploaded PDFs or company database as fallback.")
+st.title("💬 FG HR Chatbot")
+st.caption("Currenly Leave and Travel Policy Available")
 
 # Sidebar
 with st.sidebar:
@@ -117,4 +117,5 @@ if prompt := st.chat_input("Ask your question here..."):
     with st.chat_message("assistant"):
         st.markdown(response)
     st.session_state.chat_history.append({"role": "assistant", "content": response})
+
 
