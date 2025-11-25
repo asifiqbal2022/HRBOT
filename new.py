@@ -17,7 +17,7 @@ TEMPERATURE = 0
 # ---------------- INITIALIZATION ----------------
 ##llm = ChatOpenAI(model_name=LLM_MODEL, temperature=TEMPERATURE)
 llm = ChatGroq(
-        api_key="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",
+        api_key="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,
         model_name="llama-3.3-70b-versatile",
         temperature=0.1,
         max_tokens=512,
@@ -117,6 +117,7 @@ if prompt := st.chat_input("Ask your question here..."):
     with st.chat_message("assistant"):
         st.markdown(response)
     st.session_state.chat_history.append({"role": "assistant", "content": response})
+
 
 
 
