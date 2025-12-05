@@ -24,12 +24,11 @@ class OpenAIWrapper:
             temperature=self.temperature,
             max_tokens=self.max_tokens
         )
-        # Get message content safely
+        # Get the content safely depending on SDK version
         message = response.choices[0].message
         if isinstance(message, dict):
             return message.get("content", "")
-        else:
-            return getattr(message, "content", "")
+        return getattr(message, "content", "")
 
 
 # ---------------- CONFIGURATION ----------------
@@ -167,6 +166,7 @@ if prompt := st.chat_input("Ask your question here..."):
         st.markdown(response)
 
     st.session_state.chat_history.append({"role": "assistant", "content": response})
+
 
 
 
