@@ -6,7 +6,7 @@ import os
 from openai import OpenAI
 
 # ---------------- OPENAI CLIENT ----------------
-client = OpenAI(api_key="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")
+OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 class OpenAIWrapper:
     def __init__(self, model="gpt-4.1-mini", temperature=1, max_tokens=512):
@@ -158,3 +158,4 @@ if prompt := st.chat_input("Ask your question here..."):
         st.markdown(response)
 
     st.session_state.chat_history.append({"role": "assistant", "content": response})
+
