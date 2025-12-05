@@ -112,7 +112,7 @@ PDF Content:
 
 User Question: {user_query}
 """
-        return response = llm.invoke(prompt) 
+        return llm.invoke(prompt)
 
     # Case 2 — Nothing found
     return (
@@ -166,6 +166,7 @@ if prompt := st.chat_input("Ask your question here..."):
         st.markdown(response)
 
     st.session_state.chat_history.append({"role": "assistant", "content": response})
+
 
 
 
