@@ -9,6 +9,8 @@ from openai import OpenAI
 # ---------------- OPENAI CLIENT ----------------
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
+import openai
+
 class OpenAIWrapper:
     def __init__(self, model="gpt-4.1-mini", temperature=1, max_tokens=512):
         self.model = model
@@ -22,12 +24,13 @@ class OpenAIWrapper:
             temperature=self.temperature,
             max_tokens=self.max_tokens
         )
-        # Safely get the content
+        # Get message content safely
         message = response.choices[0].message
         if isinstance(message, dict):
             return message.get("content", "")
         else:
-            return message.content
+            return getattr(message, "content", "")
+
 
 # ---------------- CONFIGURATION ----------------
 EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
@@ -164,6 +167,7 @@ if prompt := st.chat_input("Ask your question here..."):
         st.markdown(response)
 
     st.session_state.chat_history.append({"role": "assistant", "content": response})
+
 
 
 
