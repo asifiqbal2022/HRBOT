@@ -6,7 +6,7 @@ import os
 from openai import OpenAI
 
 # ---------------- OPENAI CLIENT ----------------
-OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 class OpenAIWrapper:
     def __init__(self, model="gpt-4.1-mini", temperature=1, max_tokens=512):
@@ -15,13 +15,13 @@ class OpenAIWrapper:
         self.max_tokens = max_tokens
 
     def invoke(self, prompt):
-        response = client.chat.completions.create(
-            model=self.model,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=self.temperature,
-            max_tokens=self.max_tokens
-        )
-        return response.choices[0].message
+       response = client.chat.completions.create(
+    model=self.model,
+    messages=[{"role": "user", "content": prompt}],
+    temperature=self.temperature,
+    max_tokens=self.max_tokens
+)
+return response.choices[0].message
 
 # ---------------- CONFIGURATION ----------------
 EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
@@ -158,4 +158,5 @@ if prompt := st.chat_input("Ask your question here..."):
         st.markdown(response)
 
     st.session_state.chat_history.append({"role": "assistant", "content": response})
+
 
