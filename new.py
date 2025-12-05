@@ -17,13 +17,17 @@ class OpenAIWrapper:
 
     def invoke(self, prompt):
         response = openai.chat.completions.create(
-    model=self.model,
-    messages=[{"role": "user", "content": prompt}],
-    temperature=self.temperature,
-    max_tokens=self.max_tokens
-)
-        # ✅ Make sure this return is inside the function
-        return response.choices[0].message['content']
+            model=self.model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=self.temperature,
+            max_tokens=self.max_tokens
+        )
+        # Safely get the content
+        message = response.choices[0].message
+        if isinstance(message, dict):
+            return message.get("content", "")
+        else:
+            return message.content
 
 # ---------------- CONFIGURATION ----------------
 EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
@@ -160,6 +164,7 @@ if prompt := st.chat_input("Ask your question here..."):
         st.markdown(response)
 
     st.session_state.chat_history.append({"role": "assistant", "content": response})
+
 
 
 
