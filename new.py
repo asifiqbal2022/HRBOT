@@ -16,12 +16,12 @@ class OpenAIWrapper:
         self.max_tokens = max_tokens
 
     def invoke(self, prompt):
-        response = openai.ChatCompletion.create(
-            model=self.model,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=self.temperature,
-            max_tokens=self.max_tokens
-        )
+        response = openai.chat.completions.create(
+    model=self.model,
+    messages=[{"role": "user", "content": prompt}],
+    temperature=self.temperature,
+    max_tokens=self.max_tokens
+)
         # ✅ Make sure this return is inside the function
         return response.choices[0].message['content']
 
@@ -160,6 +160,7 @@ if prompt := st.chat_input("Ask your question here..."):
         st.markdown(response)
 
     st.session_state.chat_history.append({"role": "assistant", "content": response})
+
 
 
 
